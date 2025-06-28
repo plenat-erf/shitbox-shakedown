@@ -5,9 +5,13 @@ body {
 .hero {
   background: linear-gradient(135deg, rgba(230,57,70,0.85), rgba(29,53,87,0.85)), url('logo.png') center/cover;
   color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
 }
 .hero h1 {
   font-size: 3rem;
+}
+.hero p {
+  font-size: 1.25rem;
 }
 
 #logo {
@@ -45,4 +49,5 @@ footer {
 }
 .dataTables_wrapper .dataTables_filter input {
   margin-left: 0.5rem;
+  width: 200px;
 }
