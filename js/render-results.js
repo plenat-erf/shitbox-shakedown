@@ -18,11 +18,12 @@ fetch('results/round1.csv')
     const container = document.getElementById('results-table');
     container.innerHTML = '';
     container.appendChild(table);
-    if (window.attachTableSorting) {
-      window.attachTableSorting(table);
-    }
-    if (window.attachSearchFilter) {
-      window.attachSearchFilter(table);
+    if (window.jQuery && jQuery.fn.dataTable) {
+      $(table).DataTable({
+        paging: false,
+        info: false,
+        searching: true
+      });
     }
   })
   .catch(err => {
