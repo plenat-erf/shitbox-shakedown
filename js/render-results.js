@@ -3,6 +3,7 @@ fetch('results/round1.csv')
   .then(csv => {
     const rows = csv.trim().split('\n').map(row => row.split(','));
     const table = document.createElement('table');
+    table.className = 'table table-dark table-striped table-hover';
 
     rows.forEach((cells, i) => {
       const row = document.createElement('tr');
@@ -19,6 +20,9 @@ fetch('results/round1.csv')
     container.appendChild(table);
     if (window.attachTableSorting) {
       window.attachTableSorting(table);
+    }
+    if (window.attachSearchFilter) {
+      window.attachSearchFilter(table);
     }
   })
   .catch(err => {
