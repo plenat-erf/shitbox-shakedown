@@ -1,7 +1,18 @@
+:root {
+  --bg-color: #111;
+  --text-color: #eee;
+  --accent-color: #e63946;
+}
+
+body.light {
+  --bg-color: #fafafa;
+  --text-color: #222;
+}
+
 body {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: #111;
-  color: #eee;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
   text-align: center;
@@ -10,7 +21,22 @@ body {
 header {
   background-color: #222;
   padding: 20px;
-  border-bottom: 2px dashed #e63946;
+  border-bottom: 2px dashed var(--accent-color);
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 6px 12px;
+  border: none;
+  background-color: var(--accent-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+body.light #theme-toggle {
+  background-color: #444;
 }
 
 #logo {
@@ -39,7 +65,7 @@ table {
   width: 90%;
   max-width: 800px;
   background-color: #1e1e1e;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 th, td {
@@ -49,11 +75,15 @@ th, td {
 
 th {
   background-color: #333;
-  color: #ffcc00;
+  color: var(--accent-color);
 }
 
 td {
   background-color: #222;
+}
+
+tr:hover td {
+  background-color: #333;
 }
 
 footer {
@@ -61,4 +91,5 @@ footer {
   padding: 15px;
   background-color: #000;
   color: #666;
+  border-top: 1px solid #444;
 }

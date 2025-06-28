@@ -17,6 +17,9 @@ fetch('results/round1.csv')
     const container = document.getElementById('results-table');
     container.innerHTML = '';
     container.appendChild(table);
+    if (window.attachTableSorting) {
+      window.attachTableSorting(table);
+    }
   })
   .catch(err => {
     document.getElementById('results-table').textContent = 'Could not load results.';
