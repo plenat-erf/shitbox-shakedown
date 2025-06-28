@@ -1,18 +1,20 @@
-// Handles theme switching and table sorting
+// Theme switching and utilities
 
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
+  const root = document.documentElement;
   const current = localStorage.getItem('theme') || 'dark';
+  root.setAttribute('data-bs-theme', current);
   if (current === 'light') {
-    document.body.classList.add('light');
     btn.textContent = 'Dark Mode';
   }
   btn.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    btn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    const isLight = root.getAttribute('data-bs-theme') === 'light';
+    const newTheme = isLight ? 'dark' : 'light';
+    root.setAttribute('data-bs-theme', newTheme);
+    btn.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+    localStorage.setItem('theme', newTheme);
   });
 }
 
@@ -39,6 +41,21 @@ function attachTableSorting(table) {
   });
 }
 
+function attachSearchFilter(table) {
+  const input = document.getElementById('search');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    const rows = table.querySelectorAll('tr');
+    rows.forEach((row, idx) => {
+      if (idx === 0) return; // skip header
+      const driver = row.children[1].textContent.toLowerCase();
+      row.style.display = driver.includes(query) ? '' : 'none';
+    });
+  });
+}
+
 window.attachTableSorting = attachTableSorting;
+window.attachSearchFilter = attachSearchFilter;
 
 document.addEventListener('DOMContentLoaded', initThemeToggle);
