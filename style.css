@@ -1,14 +1,17 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  background: linear-gradient(180deg, #0d1117 0%, #1a2230 100%);
 }
 
 #logo {
-  height: 60px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Theme colors */
 :root {
-  --bs-primary-rgb: 230,57,70; /* accent */
+  --bs-primary-rgb: 0,180,216; /* accent */
 }
 
 [data-bs-theme="dark"] {
@@ -16,10 +19,6 @@ body {
   --bs-body-color: #eee;
 }
 
-[data-bs-theme="light"] {
-  --bs-body-bg: #fafafa;
-  --bs-body-color: #222;
-}
 
 footer {
   font-size: 0.9rem;
@@ -28,4 +27,14 @@ footer {
 /* Table styling */
 #results-table table {
   width: 100%;
+}
+
+/* DataTables tweaks */
+.dataTables_wrapper .dataTables_filter label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0.5rem;
+  width: 200px;
 }
