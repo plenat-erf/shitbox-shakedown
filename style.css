@@ -12,6 +12,9 @@
   margin-right: 0;
   gap: 0.5rem;
   opacity: 0.97;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .gallery-divider hr {
   border: none;
