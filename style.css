@@ -25,8 +25,12 @@ footer {
 }
 
 /* Table styling */
+#results-table {
+  background: url('SEC_C_MF.jpg') no-repeat center/cover;
+}
 #results-table table {
   width: 100%;
+  background-color: transparent;
 }
 
 /* DataTables tweaks */
