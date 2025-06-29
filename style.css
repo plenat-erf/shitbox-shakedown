@@ -21,6 +21,9 @@
   border-top: 2.5px solid #00b4d8;
   opacity: 0.7;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .gallery-divider span {
   font-family: 'Poppins', 'Roboto', sans-serif;
