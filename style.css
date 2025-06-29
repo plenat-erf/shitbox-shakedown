@@ -179,7 +179,7 @@
   opacity: 0.85;
 }
 #logo-header-redesign {
-  height: 65px;
+  height: 200px;
   width: auto;
   border-radius: 1.1rem;
   background: rgba(0,180,216,0.08);
@@ -206,7 +206,7 @@
 }
 @media (max-width: 600px) {
   #logo-header-redesign {
-    height: 36px;
+    height: 200px;
     padding: 0.1rem 0.3rem;
   }
   .site-title {
@@ -306,7 +306,7 @@
 
 @media (max-width: 600px) {
   #logo-header {
-    height: 65px;
+    height: 200px;
     padding: 0.15rem 0.4rem;
   }
   .site-title {
