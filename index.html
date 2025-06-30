@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <!-- Open Graph (Facebook, Messenger, etc.) -->
+  <meta property="og:image" content="https://plenat-erf.github.io/shitbox-shakedown/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+  
+  <!-- Twitter Card (optional but recommended) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://plenat-erf.github.io/shitbox-shakedown/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FYQY5HRQVH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FYQY5HRQVH');
+</script>
+<body class="d-flex flex-column min-vh-100">
+  <header class="custom-header shadow-sm position-relative redesigned-header">
+    <div class="container d-flex flex-row align-items-center justify-content-center py-3 px-0">
+      <img src="logo.png" alt="Shitbox Shakedown Rally League logo" id="logo-header-redesign" class="me-3 animate-logo img-fluid">
+      <div class="header-text-group text-center">
+        <h1 class="site-title mb-0">Shitbox Shakedown</h1>
+        <div class="header-subtitle">Rally League</div>
+      </div>
+    </div>
+    <div class="header-glass"></div>
+  </header>
+  <main class="flex-grow-1 py-5">
+    <div class="container text-center">
+      <h2 class="mb-4 animate-subtitle">Round 1 Results <small class="text-muted">21JUN2025</small></h2>
+      <img src="SEC_C_MF.jpg" alt="Podium celebration with winners" class="img-fluid podium-img rounded shadow mb-4 animate-podium">
+      <div class="card shadow-lg border-primary mb-4 glass-card" id="results-card">
+        <div class="card-body p-4">
+          <div id="results-table" class="table-responsive mb-2">
+            <div class="spinner-border text-primary" role="status" id="results-spinner">
+              <span class="visually-hidden">Loading results...</span>
+            </div>
+          </div>
+          <div id="results-footnotes" class="text-start small text-secondary mt-3 visually-hidden animate-footnotes">
+            <hr>
+            <div><sup>1</sup> Returned with an extra tire on the rims, somehow.</div>
+            <div><sup>2</sup> Run started facing the wrong way and in reverse. Won on style.</div>
+          </div>
+          <!-- Section Divider -->
+          <div class="gallery-divider my-5 d-flex align-items-center justify-content-center">
+            <hr class="flex-grow-1 mx-2 align-items-center justify-content-center" style="border-top:2.5px solid #00b4d8;opacity:0.7;">
+            <span class="mx-3 text-uppercase fw-bold text-info align-items-center justify-content-center" style="letter-spacing:0.12em;font-size:1.5em;">Race Day Gallery</span>
+            <hr class="flex-grow-1 mx-2 align-items-center justify-content-center" style="border-top:2.5px solid #00b4d8;opacity:0.7;">
+          </div>
+          <!-- Photo Gallery Start -->
+          <div id="photo-gallery" class="mt-5"></div>
+          <!-- Photo Gallery End -->
+        </div>
+      </div>
+      <!-- Feedback FAB removed -->
+    </div>
+    <!-- Feedback Modal removed -->
+  </main>
+  <!-- Gallery Modal -->
+  <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-dark border-0">
+        <div class="modal-body p-0">
+          <img id="galleryModalImg" src="" class="img-fluid w-100 rounded" alt="Large race photo">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-secondary text-center py-3 mt-auto glass-footer">
+    <div class="container">
+      <p class="mb-0 justify-content-center">©℗ Published by plenat_erf under licence from His Most Illustrious & Learned Joshua Sturre and protected from threats domestic, international, and interplanetary with submarine-capable UGM-133 Trident II ICBM's ☢®™ </p>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="js/render-results.js"></script>
+
+  <!-- AUTOMATIC GALLERY SCRIPT START -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('photo_reel/gallery.json')
+      .then(r => r.json())
+      .then(images => {
+        const gallery = document.getElementById('photo-gallery');
+        if (!gallery) return;
+        images.forEach((img, idx) => {
+          // Build each gallery-item block
+          const wrapper = document.createElement('div');
+          wrapper.className = 'gallery-item';
+
+          const link = document.createElement('a');
+          link.href = `photo_reel/${img}`;
+          link.setAttribute('data-bs-toggle', 'modal');
+          link.setAttribute('data-bs-target', '#galleryModal');
+
+          const image = document.createElement('img');
+          image.src = `photo_reel/${img}`;
+          image.alt = `Race photo ${idx+1}`;
+          image.className = 'img-fluid rounded shadow-sm gallery-thumb';
+
+          link.appendChild(image);
+          wrapper.appendChild(link);
+          gallery.appendChild(wrapper);
+        });
+
+        // Modal open: clicking any .gallery-thumb sets modal img src
+        document.querySelectorAll('.gallery-thumb').forEach(function(img) {
+          img.parentElement.addEventListener('click', function(e) {
+            e.preventDefault();
+            var modalImg = document.getElementById('galleryModalImg');
+            modalImg.src = img.src;
+            var modal = new bootstrap.Modal(document.getElementById('galleryModal'));
+            modal.show();
+          });
+        });
+      })
+      .catch(err => {
+        const gallery = document.getElementById('photo-gallery');
+        if (gallery) gallery.textContent = "Gallery failed to load.";
+        console.error(err);
+      });
+  });
+  </script>
+  <!-- AUTOMATIC GALLERY SCRIPT END -->
+
+  <script>
+    // Add tooltips and show footnotes for special symbols in the results table after table is rendered
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme toggle, feedback FAB, and modal removed
+      // Table footnotes and tooltips
+      const observer = new MutationObserver(() => {
+        let has1 = false, has2 = false;
+        document.querySelectorAll('#results-table td').forEach(td => {
+          if (td.textContent.includes('¹')) {
+            td.title = 'Returned with an extra tire on the rims, somehow.';
+            has1 = true;
+          }
+          if (td.textContent.includes('²')) {
+            td.title = 'Run started facing the wrong way and in reverse. Won on style.';
+            has2 = true;
+          }
+        });
+        // Show footnotes if either symbol is present
+        const footnotes = document.getElementById('results-footnotes');
+        if (footnotes) {
+          if (has1 || has2) {
+            footnotes.classList.remove('visually-hidden');
+          } else {
+            footnotes.classList.add('visually-hidden');
+          }
+        }
+      });
+      const tableDiv = document.getElementById('results-table');
+      observer.observe(tableDiv, { childList: true, subtree: true });
+      // Animate in elements
+      setTimeout(() => {
+        document.querySelectorAll('.animate-title, .animate-subtitle, .animate-podium, .glass-card, .custom-header').forEach(el => {
+          el.classList.add('fade-in');
+        });
+      }, 100);
+    });
+  </script>
+</body>
+</html>
